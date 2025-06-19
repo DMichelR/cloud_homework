@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import { Trash2 } from "lucide-react";
+import { Trash2, Image as ImageIcon } from "lucide-react";
 import type { Post } from "../types/post";
 
 interface PostListProps {
@@ -50,6 +50,16 @@ export function PostList({
             </Button>
           </CardHeader>
           <CardContent>
+            {post.image && (
+              <div className="mb-4">
+                <img
+                  src={post.image.url}
+                  alt={post.title}
+                  className="w-full max-w-2xl h-auto rounded-lg shadow-sm"
+                  style={{ maxHeight: "400px", objectFit: "cover" }}
+                />
+              </div>
+            )}
             <p className="text-gray-700 whitespace-pre-wrap">{post.content}</p>
             <div className="mt-4 text-sm text-gray-500">
               Creado el{" "}
