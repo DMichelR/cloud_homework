@@ -58,7 +58,12 @@ export const usePosts = (user: User | null) => {
     try {
       setLoading(true);
       setError(null);
-      await postRepository.deletePost(postId);
+
+      // Buscar el post para obtener el publicId de la imagen
+      const postToDelete = posts.find((post) => post.id === postId);
+      const imagePublicId = postToDelete?.image?.publicId;
+
+      await postRepository.deletePost(postId, imagePublicId);
       setPosts((prev) => prev.filter((post) => post.id !== postId));
       return true;
     } catch (err) {
